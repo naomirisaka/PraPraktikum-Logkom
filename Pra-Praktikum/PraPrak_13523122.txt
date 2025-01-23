@@ -1,0 +1,93 @@
+Nama: Naomi Risaka Sitorus
+NIM: 13523122
+Kelas: K-02
+
+*********************************
+Bagian I : Fakta Rules, dan Query
+*********************************
+a. Suami dari aihoshino
+Query: 
+    | ?- pria(Suami), menikah(aihoshino, Suami).
+
+    no
+
+b. Kakek buyut dan nenek buyut dari eve
+Query: 
+    | ?- anak(eve, _Z), nenek(NenekBuyut, _Z), pria(KakekBuyut), menikah(NenekBuyut, KakekBuyut).
+
+    KakekBuyut = qika
+    NenekBuyut = makio ? 
+
+    yes
+
+c. Paman dari orang tua francesco
+Query: 
+    | ?- anak(francesco, _O), keponakan(_O, Paman), pria(Paman).
+
+    no
+
+d. Orang yang memiliki lebih dari satu istri
+Query: 
+    | ?- pria(X), menikah(X, _Y), menikah(X, _Y), Z \== Y.
+
+    X = qika ? 
+
+    yes
+
+e. Saudara tiri tertua dari shelby
+Query: 
+    | ?- saudaratiri(shelby, X), usia(X, _A), \+ (saudaratiri(_Y, shelby), usia(_Y, _B), _B > _A).
+
+    X = barok ? 
+
+    yes
+
+f. Orang tua yang memiliki tepat satu anak
+Query: 
+    | ?- menikah(_X, OrangTua), anak(_A, OrangTua), \+ (anak(_Y, OrangTua), anak(_Z, OrangTua), _Y \==  _Z).
+
+    OrangTua = makio ? ;
+
+    OrangTua = roxy ? ;
+
+    OrangTua = barok ? ;
+
+    OrangTua = eriq ? ;
+
+    OrangTua = ruby ? ;
+
+    OrangTua = francesco ? ;
+
+    OrangTua = suzy ? ;
+
+    no
+
+g. Pria yang memiliki mertua berusia lebih dari 99 tahun
+Query: 
+    | ?- pria(X), mertua(_Y, X), usia(_Y,_A), _A > 99.
+
+    X = eriq ? ;
+
+    no
+
+h. Orang yatim piatu dengan usia termuda
+Query: 
+    | ?- yatimpiatu(X), usia(X, _A), \+ (yatimpiatu(_Y), usia(_Y, _B), _B < _A).
+
+    X = francesco ? 
+
+    yes
+
+i. Orang diatas 60 tahun yang statusnya menikah dengan orang yang memiliki saudara lebih dari 1 orang
+Query: 
+    | ?- menikah(X, _Y), usia(X, _A), _A > 60, saudara(_Z, _Y), saudara(_W, _Y), _W \== _Z.
+
+    X = roxy ? 
+
+    yes
+
+j. Seluruh keturunan qika yang memiliki tepat 2 keponakan
+Query: 
+    | ?- keturunan(X, qika), keponakan(_Y, X), keponakan(_Z, X), _Y \== _Z, \+(keponakan(_W, X), _W \== _Y, _W \== _Z).
+
+    no
